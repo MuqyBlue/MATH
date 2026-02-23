@@ -59,3 +59,19 @@ function generate() {
     worksheet.appendChild(div);
   }
 }
+
+function showAnswers() {
+
+  const worksheet = document.getElementById("worksheet");
+
+  const answerDiv = document.createElement("div");
+  answerDiv.innerHTML = "<h3>Answers</h3>";
+
+  answers.forEach((ans, i) => {
+    const p = document.createElement("div");
+    p.innerText = `${i + 1}. ${ans}`;
+    answerDiv.appendChild(p);
+  });
+
+  worksheet.appendChild(answerDiv);
+}
