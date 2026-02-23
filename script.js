@@ -83,3 +83,8 @@ window.showAnswers = function () {
         button.textContent = "Show Answers";
     }
 };
+
+window.changeTheme = function () {
+  const theme = document.getElementById("themeSelect").value;
+  document.body.className = theme;
+};
