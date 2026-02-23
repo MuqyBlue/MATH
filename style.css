@@ -1,1 +1,12 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+}
 
+.controls {
+  margin-bottom: 20px;
+}
+
+.question {
+  margin-bottom: 8px;
+}
