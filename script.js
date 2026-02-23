@@ -51,28 +51,14 @@ window.generate = function () {
 // ---------------- SHOW ANSWERS ----------------
 
 window.showAnswers = function () {
+    const answerSection = document.getElementById("answerKey");
+    const button = document.getElementById("showAnswerBtn");
 
-  if (answers.length === 0) {
-    alert("Generate first!");
-    return;
-  }
-
-  const answerSection = document.getElementById("answerSection");
-  answerSection.innerHTML = "";
-
-  const title = document.createElement("h3");
-  title.innerText = "Answer Key";
-  answerSection.appendChild(title);
-
-  const container = document.createElement("div");
-  container.className = "answer-grid";
-
-  answers.forEach((ans, i) => {
-    const div = document.createElement("div");
-    div.className = "answer-item";
-    div.innerText = `${i + 1}. ${ans}`;
-    container.appendChild(div);
-  });
-
-  answerSection.appendChild(container);
+    if (answerSection.style.display === "none") {
+        answerSection.style.display = "block";
+        button.textContent = "Hide Answers";
+    } else {
+        answerSection.style.display = "none";
+        button.textContent = "Show Answers";
+    }
 };
