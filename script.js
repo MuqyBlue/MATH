@@ -52,6 +52,8 @@ const button = document.getElementById("showAnswerBtn");
 answerSection.style.display = "none";
 answerSection.innerHTML = "";
 button.textContent = "Show Answers";
+
+  console.log("RESET RUNNING");
 };
 
 
