@@ -55,9 +55,21 @@ window.showAnswers = function () {
     const button = document.getElementById("showAnswerBtn");
 
     if (answerSection.style.display === "none") {
+
+        // 🔥 ใส่คำตอบลงไปก่อนแสดง
+        answerSection.innerHTML = "<h2>Answer Key</h2>";
+
+        answers.forEach((ans, i) => {
+            const div = document.createElement("div");
+            div.innerText = `${i + 1}. ${ans}`;
+            answerSection.appendChild(div);
+        });
+
         answerSection.style.display = "block";
         button.textContent = "Hide Answers";
+
     } else {
+
         answerSection.style.display = "none";
         button.textContent = "Show Answers";
     }
