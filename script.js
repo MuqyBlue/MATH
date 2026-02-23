@@ -1,4 +1,9 @@
-import { generateQuestions } from "./generators/question-engine.js";
+import {
+  generateAddition,
+  generateSubtraction,
+  generateMultiplication,
+  generateDivision
+} from "./generators/question-engine.js";
 
 let answers = [];
 
