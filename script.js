@@ -57,20 +57,22 @@ window.showAnswers = function () {
     return;
   }
 
-  const worksheet = document.getElementById("worksheet");
+  const answerSection = document.getElementById("answerSection");
+  answerSection.innerHTML = "";
 
-  const old = document.getElementById("answerSection");
-  if (old) old.remove();
+  const title = document.createElement("h3");
+  title.innerText = "Answer Key";
+  answerSection.appendChild(title);
 
-  const answerDiv = document.createElement("div");
-  answerDiv.id = "answerSection";
-  answerDiv.innerHTML = "<h3>Answer Key</h3>";
+  const container = document.createElement("div");
+  container.className = "answer-grid";
 
   answers.forEach((ans, i) => {
-    const p = document.createElement("div");
-    p.innerText = `${i + 1}. ${ans}`;
-    answerDiv.appendChild(p);
+    const div = document.createElement("div");
+    div.className = "answer-item";
+    div.innerText = `${i + 1}. ${ans}`;
+    container.appendChild(div);
   });
 
-  worksheet.appendChild(answerDiv);
+  answerSection.appendChild(container);
 };
