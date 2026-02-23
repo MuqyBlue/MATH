@@ -24,3 +24,14 @@ h1 {
     display: none;
   }
 }
+#answerSection {
+  margin-top: 30px;
+}
+
+.answer-grid {
+  column-count: 2;
+}
+
+.answer-item {
+  margin-bottom: 6px;
+}
