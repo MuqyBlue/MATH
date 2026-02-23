@@ -1,4 +1,22 @@
-export function generateQuestions(operation, difficulty, count) {
+export function generateAddition(difficulty, count) {
+  return generate("add", difficulty, count);
+}
+
+export function generateSubtraction(difficulty, count) {
+  return generate("subtract", difficulty, count);
+}
+
+export function generateMultiplication(difficulty, count) {
+  return generate("multiply", difficulty, count);
+}
+
+export function generateDivision(difficulty, count) {
+  return generate("divide", difficulty, count);
+}
+
+// ---------------- CORE ENGINE ----------------
+
+function generate(operation, difficulty, count) {
 
   const range = getRange(difficulty);
   const questions = [];
@@ -40,6 +58,8 @@ export function generateQuestions(operation, difficulty, count) {
 
   return { questions, answers };
 }
+
+// ---------------- HELPERS ----------------
 
 function getRange(level) {
   if (level === "easy") return 10;
