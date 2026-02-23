@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Math Worksheet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <h1>Math Worksheet Generator</h1>
+
+  <div class="controls">
+    <select id="operation">
+      <option value="add">Addition</option>
+      <option value="subtract">Subtraction</option>
+      <option value="multiply">Multiplication</option>
+      <option value="divide">Division</option>
+    </select>
+
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+
+    <input type="number" id="count" value="10" min="1">
+    <input type="number" id="columns" value="2" min="1">
+
+    <button onclick="generate()">Generate</button>
+  </div>
+
+  <div id="worksheet"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
