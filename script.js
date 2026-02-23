@@ -18,17 +18,20 @@ window.generate = function () {
   worksheet.innerHTML = "";
   worksheet.style.columnCount = columns;
 
-  const result = generateQuestions(operation, difficulty, count);
+  let result;
 
-  answers = result.answers;
-
-  result.questions.forEach((q, i) => {
-    const div = document.createElement("div");
-    div.className = "question";
-    div.innerText = `${i + 1}. ${q}`;
-    worksheet.appendChild(div);
-  });
-};
+if (operation === "add") {
+  result = generateAddition(difficulty, count);
+}
+else if (operation === "subtract") {
+  result = generateSubtraction(difficulty, count);
+}
+else if (operation === "multiply") {
+  result = generateMultiplication(difficulty, count);
+}
+else if (operation === "divide") {
+  result = generateDivision(difficulty, count);
+}
 
 window.showAnswers = function () {
 
