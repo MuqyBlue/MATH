@@ -10,3 +10,17 @@ body {
 .question {
   margin-bottom: 8px;
 }
+
+h1 {
+  text-align: center;
+}
+
+#worksheet {
+  margin-top: 20px;
+}
+
+@media print {
+  .controls {
+    display: none;
+  }
+}
