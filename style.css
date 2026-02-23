@@ -35,3 +35,22 @@ h1 {
 .answer-item {
   margin-bottom: 6px;
 }
+
+/* Classic Theme */
+body.classic {
+  background-color: white;
+  color: black;
+}
+
+/* Cute Theme */
+body.cute {
+  background-color: #ffe6f2;
+  color: #333;
+}
+
+body.cute .question {
+  background: white;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
