@@ -1,12 +1,8 @@
+import { generateQuestions } from "./generators/question-engine.js";
+
 let answers = [];
 
-function getRange(level) {
-  if (level === "easy") return 10;
-  if (level === "medium") return 50;
-  return 100;
-}
-
-function generate() {
+window.generate = function () {
 
   const operation = document.getElementById("operation").value;
   const difficulty = document.getElementById("difficulty").value;
@@ -17,65 +13,29 @@ function generate() {
   worksheet.innerHTML = "";
   worksheet.style.columnCount = columns;
 
-  answers = [];
+  const result = generateQuestions(operation, difficulty, count);
 
-  const max = getRange(difficulty);
+  answers = result.answers;
 
-  for (let i = 0; i < count; i++) {
-
-    let a = Math.floor(Math.random() * max) + 1;
-    let b = Math.floor(Math.random() * max) + 1;
-
-    let questionText = "";
-    let correctAnswer = 0;
-
-    if (operation === "add") {
-      questionText = `${a} + ${b} = ____`;
-      correctAnswer = a + b;
-    }
-    else if (operation === "subtract") {
-      if (a < b) [a, b] = [b, a];
-      questionText = `${a} - ${b} = ____`;
-      correctAnswer = a - b;
-    }
-    else if (operation === "multiply") {
-      questionText = `${a} × ${b} = ____`;
-      correctAnswer = a * b;
-    }
-    else if (operation === "divide") {
-      correctAnswer = a;
-      let product = a * b;
-      questionText = `${product} ÷ ${b} = ____`;
-    }
-
-    answers.push(correctAnswer);
-
+  result.questions.forEach((q, i) => {
     const div = document.createElement("div");
     div.className = "question";
-    div.innerText = `${i + 1}. ${questionText}`;
+    div.innerText = `${i + 1}. ${q}`;
     worksheet.appendChild(div);
-  }
+  });
+};
 
-  console.log("Generated answers:", answers); // debug ดูค่าได้
-}
-
-function showAnswers() {
+window.showAnswers = function () {
 
   if (answers.length === 0) {
-    alert("Please generate worksheet first!");
+    alert("Generate first!");
     return;
   }
 
   const worksheet = document.getElementById("worksheet");
 
-  // ลบเฉลยเก่าถ้ามี
-  const oldAnswers = document.getElementById("answerSection");
-  if (oldAnswers) oldAnswers.remove();
-
   const answerDiv = document.createElement("div");
-  answerDiv.id = "answerSection";
-  answerDiv.style.marginTop = "20px";
-  answerDiv.innerHTML = "<h3>Answers</h3>";
+  answerDiv.innerHTML = "<h3>Answer Key</h3>";
 
   answers.forEach((ans, i) => {
     const p = document.createElement("div");
@@ -84,6 +44,4 @@ function showAnswers() {
   });
 
   worksheet.appendChild(answerDiv);
-
-  console.log("Showing answers:", answers); // debug
-}
+};
