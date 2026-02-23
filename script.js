@@ -45,6 +45,13 @@ window.generate = function () {
     div.innerText = `${i + 1}. ${q}`;
     worksheet.appendChild(div);
   });
+  // 🔥 Reset answer section
+const answerSection = document.getElementById("answerKey");
+const button = document.getElementById("showAnswerBtn");
+
+answerSection.style.display = "none";
+answerSection.innerHTML = "";
+button.textContent = "Show Answers";
 };
 
 
