@@ -62,9 +62,18 @@ function generate() {
 
 function showAnswers() {
 
+  if (answers.length === 0) {
+    alert("Please generate worksheet first!");
+    return;
+  }
+
   const worksheet = document.getElementById("worksheet");
 
+  const oldAnswers = document.getElementById("answerSection");
+  if (oldAnswers) oldAnswers.remove();
+
   const answerDiv = document.createElement("div");
+  answerDiv.id = "answerSection";
   answerDiv.innerHTML = "<h3>Answers</h3>";
 
   answers.forEach((ans, i) => {
