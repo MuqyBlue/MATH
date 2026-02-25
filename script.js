@@ -90,10 +90,16 @@ window.changeTheme = function () {
   document.body.className = theme;
 };
 
-const exportBtn = document.getElementById("exportBtn");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (exportBtn) {
-  exportBtn.addEventListener("click", function () {
+  const exportBtn = document.getElementById("exportBtn");
+
+  if (!exportBtn) {
+    console.log("Export button not found");
+    return;
+  }
+
+  exportBtn.addEventListener("click", () => {
 
     const worksheet = document.getElementById("worksheet");
 
@@ -110,4 +116,5 @@ if (exportBtn) {
     });
 
   });
-}
+
+});
