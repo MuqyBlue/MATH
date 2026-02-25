@@ -1,3 +1,4 @@
+const html2canvas = window.html2canvas;
 import {
   generateAddition,
   generateSubtraction,
@@ -88,3 +89,25 @@ window.changeTheme = function () {
   const theme = document.getElementById("themeSelect").value;
   document.body.className = theme;
 };
+
+const exportBtn = document.getElementById("exportBtn");
+
+if (exportBtn) {
+  exportBtn.addEventListener("click", function () {
+
+    const worksheet = document.getElementById("worksheet");
+
+    if (!worksheet) {
+      alert("Worksheet not found!");
+      return;
+    }
+
+    html2canvas(worksheet, { scale: 2 }).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "worksheet.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+
+  });
+}
