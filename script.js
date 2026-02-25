@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   exportBtn.addEventListener("click", () => {
 
-  window.html2canvas(document.body, {
+  html2canvas(document.body, {
     scale: 2
   }).then(canvas => {
 
