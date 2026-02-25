@@ -1,4 +1,4 @@
-const html2canvas = window.html2canvas;
+
 import {
   generateAddition,
   generateSubtraction,
@@ -102,7 +102,7 @@ if (exportBtn) {
       return;
     }
 
-    html2canvas(worksheet, { scale: 2 }).then(canvas => {
+    window.html2canvas(worksheet, { scale: 2 }).then(canvas => {
       const link = document.createElement("a");
       link.download = "worksheet.png";
       link.href = canvas.toDataURL("image/png");
