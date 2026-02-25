@@ -100,7 +100,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   exportBtn.addEventListener("click", () => {
-    alert("CLICK WORKING");
+
+  window.html2canvas(document.body, {
+    scale: 2
+  }).then(canvas => {
+
+    const link = document.createElement("a");
+    link.download = "worksheet.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
   });
+
+});
 
 });
