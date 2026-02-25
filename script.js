@@ -95,26 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const exportBtn = document.getElementById("exportBtn");
 
   if (!exportBtn) {
-    console.log("Export button not found");
+    alert("Export button not found");
     return;
   }
 
   exportBtn.addEventListener("click", () => {
-
-    const worksheet = document.getElementById("worksheet");
-
-    if (!worksheet) {
-      alert("Worksheet not found!");
-      return;
-    }
-
-    window.html2canvas(worksheet, { scale: 2 }).then(canvas => {
-      const link = document.createElement("a");
-      link.download = "worksheet.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-
+    alert("CLICK WORKING");
   });
 
 });
