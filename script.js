@@ -126,3 +126,67 @@ window.exportPDF = function () {
   newWindow.document.close();
   newWindow.print();
 };
+//////////////
+window.exportSVG = function () {
+
+  let svgWidth = 800;
+  let svgHeight = 1100;
+
+  let y = 80;
+
+  let svgContent = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">
+    <style>
+      text { font-family: Nunito, Arial; font-size: 16px; fill: black; }
+      .title { font-size: 28px; font-weight: bold; }
+    </style>
+
+    <text x="50%" y="40" text-anchor="middle" class="title">Math Worksheet</text>
+    <text x="50" y="70">Name: __________   Date: __________</text>
+  `;
+
+  // 🔥 2 columns layout
+  const col1X = 50;
+  const col2X = 400;
+
+  answers.forEach((ans, i) => {
+
+    const col = i < answers.length / 2 ? 1 : 2;
+
+    let x = col === 1 ? col1X : col2X;
+
+    if (col === 2 && i === Math.ceil(answers.length / 2)) {
+      y = 80; // reset y for column 2
+    }
+
+    const questionText = document.querySelectorAll(".question-box")[i].innerText;
+
+    svgContent += `<text x="${x}" y="${y}">${questionText}</text>`;
+
+    y += 30;
+
+  });
+
+  // 🔥 Answer Key
+  y += 20;
+  svgContent += `<text x="50" y="${y}" class="title">Answer Key</text>`;
+
+  y += 30;
+
+  answers.forEach((ans, i) => {
+    svgContent += `<text x="50" y="${y}">${i + 1}. ${ans}</text>`;
+    y += 25;
+  });
+
+  svgContent += `</svg>`;
+
+  // 🔥 download
+  const blob = new Blob([svgContent], { type: "image/svg+xml" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "worksheet.svg";
+  link.click();
+
+};
