@@ -86,9 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   exportBtn.addEventListener("click", () => {
 
-    html2canvas(document.body, {
-      scale: 2
-    }).then(canvas => {
+    html2canvas(document.querySelector(".container")).then(canvas => {
 
       const link = document.createElement("a");
       link.download = "worksheet.png";
