@@ -132,61 +132,74 @@ window.exportSVG = function () {
   let svgWidth = 800;
   let svgHeight = 1100;
 
-  let y = 80;
+  let y = 100;
 
   let svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">
     <style>
-      text { font-family: Nunito, Arial; font-size: 16px; fill: black; }
+      text { font-family: Arial; font-size: 16px; }
       .title { font-size: 28px; font-weight: bold; }
     </style>
 
-    <text x="50%" y="40" text-anchor="middle" class="title">Math Worksheet</text>
-    <text x="50" y="70">Name: __________   Date: __________</text>
+    <text x="50%" y="50" text-anchor="middle" class="title">Math Worksheet</text>
+    <text x="50" y="80">Name: __________   Date: __________</text>
   `;
 
-  // 🔥 2 columns layout
   const col1X = 50;
-  const col2X = 400;
+  const col2X = 420;
 
-  answers.forEach((ans, i) => {
+  const half = Math.ceil(answers.length / 2);
 
-    const col = i < answers.length / 2 ? 1 : 2;
+  document.querySelectorAll(".question-box").forEach((el, i) => {
 
+    let col = i < half ? 1 : 2;
     let x = col === 1 ? col1X : col2X;
 
-    if (col === 2 && i === Math.ceil(answers.length / 2)) {
-      y = 80; // reset y for column 2
-    }
+    let rowIndex = col === 1 ? i : i - half;
+    let yPos = 120 + rowIndex * 40;
 
-    const questionText = document.querySelectorAll(".question-box")[i].innerText;
+    // 🔥 แยก text
+    let fullText = el.innerText;
 
-    svgContent += `<text x="${x}" y="${y}">${questionText}</text>`;
+    let parts = fullText.split("=");
 
-    y += 30;
+    let left = parts[0]; // "1. 2 + 3 "
+    
+    svgContent += `<text x="${x}" y="${yPos}">${left}=</text>`;
+
+    // 🔥 เส้นคำตอบ (แยกเป็น line)
+    svgContent += `
+      <line 
+        x1="${x + 120}" 
+        y1="${yPos - 5}" 
+        x2="${x + 220}" 
+        y2="${yPos - 5}" 
+        stroke="black" 
+        stroke-width="1"
+      />
+    `;
 
   });
 
-  // 🔥 Answer Key
-  y += 20;
-  svgContent += `<text x="50" y="${y}" class="title">Answer Key</text>`;
+  // 🔥 Answer Key (แยกทีละบรรทัด)
+  let answerY = 600;
 
-  y += 30;
+  svgContent += `<text x="50" y="${answerY}" class="title">Answer Key</text>`;
+  answerY += 30;
 
   answers.forEach((ans, i) => {
-    svgContent += `<text x="50" y="${y}">${i + 1}. ${ans}</text>`;
-    y += 25;
+    svgContent += `<text x="50" y="${answerY}">${i + 1}.</text>`;
+    svgContent += `<text x="80" y="${answerY}">${ans}</text>`;
+    answerY += 25;
   });
 
   svgContent += `</svg>`;
 
-  // 🔥 download
   const blob = new Blob([svgContent], { type: "image/svg+xml" });
   const url = URL.createObjectURL(blob);
 
   const link = document.createElement("a");
   link.href = url;
-  link.download = "worksheet.svg";
+  link.download = "worksheet-editable.svg";
   link.click();
-
 };
