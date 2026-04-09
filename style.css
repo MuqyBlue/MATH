@@ -1,43 +1,26 @@
-/* =========================
-   🎨 DESIGN SYSTEM
-========================= */
 :root {
   --bg: #F7F7F7;
   --card: #FFFFFF;
   --line: #222;
   --accent-yellow: #FFD84D;
-  --accent-orange: #FF8A5B;
-  --accent-blue: #6EC1E4;
   --text: #222;
 }
 
-/* =========================
-   🧱 BASE
-========================= */
+/* BASE */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
   background: var(--bg);
-  color: var(--text);
   margin: 0;
   padding: 20px;
 }
 
-h1, h2 {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-/* =========================
-   📦 LAYOUT
-========================= */
+/* LAYOUT */
 .container {
   max-width: 900px;
   margin: auto;
 }
 
-/* =========================
-   🧩 CARD SYSTEM (หัวใจหลัก)
-========================= */
+/* CARD (เฉพาะ control panel) */
 .card {
   background: var(--card);
   border: 2px solid var(--line);
@@ -47,21 +30,7 @@ h1, h2 {
   box-shadow: 4px 6px 0px #000;
 }
 
-/* =========================
-   🧾 HEADER
-========================= */
-.header {
-  text-align: center;
-}
-
-.header p {
-  font-size: 14px;
-  color: #555;
-}
-
-/* =========================
-   🎛 CONTROLS
-========================= */
+/* CONTROLS */
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -75,9 +44,7 @@ select, input {
   border: 2px solid #222;
 }
 
-/* =========================
-   🔘 BUTTON
-========================= */
+/* BUTTON */
 button {
   border: 2px solid #222;
   border-radius: 999px;
@@ -86,39 +53,36 @@ button {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 2px 3px 0px #000;
-  transition: all 0.1s ease;
 }
 
-button:hover {
-  background: var(--accent-orange);
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-button:active {
-  transform: translateY(2px);
-  box-shadow: none;
-}
-
-/* =========================
-   🧮 WORKSHEET
-========================= */
-#worksheet {
-  margin-top: 10px;
-}
-
-/* กล่องโจทย์ */
-.question-box {
+/* EXPORT AREA (หน้ากระดาษจริง) */
+#exportArea {
   background: white;
-  border: 2px solid #222;
-  border-radius: 14px;
-  padding: 10px 14px;
-  margin-bottom: 10px;
+  padding: 20px;
 }
 
-/* =========================
-   📊 ANSWER KEY
-========================= */
-#answerSection {
+/* QUESTIONS */
+#worksheet {
+  column-count: 2;
   margin-top: 20px;
+}
+
+.question-box {
+  border-bottom: 1px solid #aaa;
+  padding: 8px 0;
+}
+
+/* ANSWER */
+#answerSection {
+  margin-top: 30px;
+  border-top: 2px dashed #aaa;
+  padding-top: 10px;
 }
 
 .answer-grid {
@@ -129,4 +93,17 @@ button:active {
   margin-bottom: 6px;
 }
 
-/* =============
+/* PRINT */
+.no-print {
+  display: block;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  body {
+    background: white;
+  }
+}
