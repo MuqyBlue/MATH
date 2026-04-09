@@ -1,4 +1,3 @@
-
 import {
   generateAddition,
   generateSubtraction,
@@ -23,95 +22,81 @@ window.generate = function () {
 
   let result;
 
+  // ✅ เรียง param ให้ถูก (count, difficulty)
   if (operation === "add") {
-    result = generateAddition(difficulty, count);
-  }
-  else if (operation === "subtract") {
-    result = generateSubtraction(difficulty, count);
-  }
-  else if (operation === "multiply") {
-    result = generateMultiplication(difficulty, count);
-  }
-  else if (operation === "divide") {
-    result = generateDivision(difficulty, count);
+    result = generateAddition(count, difficulty);
+  } else if (operation === "subtract") {
+    result = generateSubtraction(count, difficulty);
+  } else if (operation === "multiply") {
+    result = generateMultiplication(count, difficulty);
+  } else if (operation === "divide") {
+    result = generateDivision(count, difficulty);
   }
 
-  // 🔥 เก็บ answers จาก engine
+  // 🔥 เก็บ answers
   answers = result.answers;
 
-  // 🔥 แสดงคำถาม
+  // 🔥 แสดงโจทย์
   result.questions.forEach((q, i) => {
     const div = document.createElement("div");
-    div.className = "question";
+    div.className = "question-box"; // ✅ ใช้ style ใหม่
     div.innerText = `${i + 1}. ${q}`;
     worksheet.appendChild(div);
   });
-  // 🔥 Reset answer section
-const answerSection = document.getElementById("answerKey");
-const button = document.getElementById("showAnswerBtn");
 
-answerSection.style.display = "none";
-answerSection.innerHTML = "";
-button.textContent = "Show Answers";
+  // 🔥 reset answer section
+  const answerSection = document.getElementById("answerSection");
+  answerSection.style.display = "none";
+  answerSection.innerHTML = "";
 
-  console.log("RESET RUNNING");
 };
-
 
 // ---------------- SHOW ANSWERS ----------------
 
 window.showAnswers = function () {
-    const answerSection = document.getElementById("answerKey");
-    const button = document.getElementById("showAnswerBtn");
+  const answerSection = document.getElementById("answerSection");
 
-    if (answerSection.style.display === "none") {
+  if (answerSection.style.display === "none") {
 
-        // 🔥 ใส่คำตอบลงไปก่อนแสดง
-        answerSection.innerHTML = "<h2>Answer Key</h2>";
+    answerSection.innerHTML = "<h2>Answer Key</h2>";
 
-        answers.forEach((ans, i) => {
-            const div = document.createElement("div");
-            div.innerText = `${i + 1}. ${ans}`;
-            answerSection.appendChild(div);
-        });
+    const grid = document.createElement("div");
+    grid.className = "answer-grid";
 
-        answerSection.style.display = "block";
-        button.textContent = "Hide Answers";
+    answers.forEach((ans, i) => {
+      const div = document.createElement("div");
+      div.className = "answer-item";
+      div.innerText = `${i + 1}. ${ans}`;
+      grid.appendChild(div);
+    });
 
-    } else {
+    answerSection.appendChild(grid);
+    answerSection.style.display = "block";
 
-        answerSection.style.display = "none";
-        button.textContent = "Show Answers";
-    }
+  } else {
+    answerSection.style.display = "none";
+  }
 };
 
-window.changeTheme = function () {
-  const theme = document.getElementById("themeSelect").value;
-  document.body.className = theme;
-};
+// ---------------- EXPORT PNG ----------------
 
 document.addEventListener("DOMContentLoaded", () => {
 
   const exportBtn = document.getElementById("exportBtn");
 
-  if (!exportBtn) {
-    alert("Export button not found");
-    return;
-  }
-
   exportBtn.addEventListener("click", () => {
 
-  html2canvas(document.body, {
-    scale: 2
-  }).then(canvas => {
+    html2canvas(document.body, {
+      scale: 2
+    }).then(canvas => {
 
-    const link = document.createElement("a");
-    link.download = "worksheet.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+      const link = document.createElement("a");
+      link.download = "worksheet.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+
+    });
 
   });
-
-});
 
 });
