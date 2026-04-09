@@ -45,9 +45,9 @@ window.generate = function () {
   });
 
   // 🔥 reset answer section
-  const answerSection = document.getElementById("answerSection");
-  answerSection.style.display = "none";
-  answerSection.innerHTML = "";
+  const answerSection = document.getElementById("answerSection")
+
+answerSection.style.display = "block"
 
 };
 
