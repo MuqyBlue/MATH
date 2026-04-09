@@ -132,22 +132,18 @@ window.exportSVG = function () {
   let svgWidth = 800;
   let svgHeight = 1100;
 
-  let y = 100;
-
   let svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}">
-    <style>
-      text { font-family: Arial; font-size: 16px; }
-      .title { font-size: 28px; font-weight: bold; }
-    </style>
-
-    <text x="50%" y="50" text-anchor="middle" class="title">Math Worksheet</text>
-    <text x="50" y="80">Name: __________   Date: __________</text>
+    
+    <!-- HEADER -->
+    <g id="header">
+      <text x="50%" y="50" text-anchor="middle" font-size="28" font-weight="bold">Math Worksheet</text>
+      <text x="50" y="80">Name: __________   Date: __________</text>
+    </g>
   `;
 
   const col1X = 50;
   const col2X = 420;
-
   const half = Math.ceil(answers.length / 2);
 
   document.querySelectorAll(".question-box").forEach((el, i) => {
@@ -156,44 +152,39 @@ window.exportSVG = function () {
     let x = col === 1 ? col1X : col2X;
 
     let rowIndex = col === 1 ? i : i - half;
-    let yPos = 120 + rowIndex * 40;
+    let y = 120 + rowIndex * 40;
 
-    // 🔥 แยก text
     let fullText = el.innerText;
-
     let parts = fullText.split("=");
+    let left = parts[0];
 
-    let left = parts[0]; // "1. 2 + 3 "
-    
-    svgContent += `<text x="${x}" y="${yPos}">${left}=</text>`;
-
-    // 🔥 เส้นคำตอบ (แยกเป็น line)
     svgContent += `
-      <line 
-        x1="${x + 120}" 
-        y1="${yPos - 5}" 
-        x2="${x + 220}" 
-        y2="${yPos - 5}" 
-        stroke="black" 
-        stroke-width="1"
-      />
+      <g class="question">
+        <text x="${x}" y="${y}">${i + 1}.</text>
+        <text x="${x + 25}" y="${y}">${left}=</text>
+        <line x1="${x + 140}" y1="${y - 5}" x2="${x + 240}" y2="${y - 5}" stroke="black"/>
+      </g>
     `;
-
   });
 
-  // 🔥 Answer Key (แยกทีละบรรทัด)
+  // ANSWER KEY
   let answerY = 600;
 
-  svgContent += `<text x="50" y="${answerY}" class="title">Answer Key</text>`;
+  svgContent += `<g id="answers">`;
+  svgContent += `<text x="50" y="${answerY}" font-size="24">Answer Key</text>`;
   answerY += 30;
 
   answers.forEach((ans, i) => {
-    svgContent += `<text x="50" y="${answerY}">${i + 1}.</text>`;
-    svgContent += `<text x="80" y="${answerY}">${ans}</text>`;
+    svgContent += `
+      <g class="answer">
+        <text x="50" y="${answerY}">${i + 1}.</text>
+        <text x="80" y="${answerY}">${ans}</text>
+      </g>
+    `;
     answerY += 25;
   });
 
-  svgContent += `</svg>`;
+  svgContent += `</g></svg>`;
 
   const blob = new Blob([svgContent], { type: "image/svg+xml" });
   const url = URL.createObjectURL(blob);
