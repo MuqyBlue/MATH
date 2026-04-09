@@ -1,16 +1,16 @@
-export function generateAddition(difficulty, count) {
+export function generateAddition(count, difficulty) {
   return generate("add", difficulty, count);
 }
 
-export function generateSubtraction(difficulty, count) {
+export function generateSubtraction(count, difficulty) {
   return generate("subtract", difficulty, count);
 }
 
-export function generateMultiplication(difficulty, count) {
+export function generateMultiplication(count, difficulty) {
   return generate("multiply", difficulty, count);
 }
 
-export function generateDivision(difficulty, count) {
+export function generateDivision(count, difficulty) {
   return generate("divide", difficulty, count);
 }
 
