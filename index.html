@@ -1,50 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Math Worksheet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Math Worksheet Generator</title>
+
+  <!-- Font (ทำให้ดูโปรขึ้นทันที) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+  </style>
 </head>
-  
-<body class="classic">
 
-  <h1>Math Worksheet Generator</h1>
+<body>
 
-  <div class="controls">
-    <select id="operation">
-      <option value="add">Addition</option>
-      <option value="subtract">Subtraction</option>
-      <option value="multiply">Multiplication</option>
-      <option value="divide">Division</option>
-    </select>
+  <div class="container">
 
-    <select id="themeSelect" onchange="changeTheme()">
-      <option value="classic">Classic</option>
-      <option value="cute">Cute</option>
-    </select>
+    <!-- 🧾 HEADER -->
+    <div class="card header">
+      <h2>Math Worksheet</h2>
+      <p>Name: ________ Date: ________</p>
+    </div>
 
-    <select id="difficulty">
-      <option value="easy">Easy</option>
-      <option value="medium">Medium</option>
-      <option value="hard">Hard</option>
-    </select>
+    <!-- 🎛 CONTROLS -->
+    <div class="card controls">
+      <select id="operation">
+        <option value="add">Addition</option>
+        <option value="subtract">Subtraction</option>
+        <option value="multiply">Multiplication</option>
+        <option value="divide">Division</option>
+      </select>
 
-    <input type="number" id="count" value="10" min="1">
-    <input type="number" id="columns" value="2" min="1">
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
 
-    <button onclick="generate()">Generate</button>
-    <button id="showAnswerBtn" onclick="showAnswers()">Show Answers</button>
-    <button onclick="window.print()">Print</button>
-    <button id="exportBtn">Export PNG</button>
+      <input type="number" id="count" value="10" min="1">
+      <input type="number" id="columns" value="2" min="1">
+
+      <button onclick="generate()">Generate</button>
+      <button onclick="showAnswers()">Show Answers</button>
+      <button onclick="window.print()">Print</button>
+      <button id="exportBtn">Export PNG</button>
+    </div>
+
+    <!-- 🧮 WORKSHEET -->
+    <div id="worksheet" class="card"></div>
+
+    <!-- 📊 ANSWER KEY -->
+    <div id="answerSection" class="card" style="display:none;"></div>
+
   </div>
 
-  <div id="worksheet"></div>
+  <!-- html2canvas (export PNG) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-<hr>
+  <!-- JS -->
+  <script type="module" src="script.js"></script>
 
-<div id="answerKey" style="display: none;"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script type="module" src="script.js"></script>
 </body>
 </html>
