@@ -106,3 +106,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+//////////////////////
+window.exportPDF = function () {
+
+  const printContents = document.getElementById("exportArea").innerHTML;
+  const newWindow = window.open("", "", "width=800,height=600");
+
+  newWindow.document.write(`
+    <html>
+      <head>
+        <title>Worksheet</title>
+      </head>
+      <body>
+        ${printContents}
+      </body>
+    </html>
+  `);
+
+  newWindow.document.close();
+  newWindow.print();
+};
