@@ -86,24 +86,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   exportBtn.addEventListener("click", () => {
 
-  const container = document.querySelector(".container")
-  const answerSection = document.getElementById("answerSection")
+    const exportArea = document.getElementById("exportArea");
+    const answerSection = document.getElementById("answerSection");
 
-  // เปิด answer ก่อน export
-  answerSection.style.display = "block"
+    // เปิด answer ก่อน export
+    answerSection.style.display = "block";
 
-  html2canvas(container, {
-    scale: 3
-  }).then(canvas => {
+    html2canvas(exportArea, {
+      scale: 3
+    }).then(canvas => {
 
-    const link = document.createElement("a")
-    link.download = "math-worksheet.png"
-    link.href = canvas.toDataURL("image/png")
-    link.click()
+      const link = document.createElement("a");
+      link.download = "math-worksheet.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
 
-  })
-
-})
+    });
 
   });
 
+});
