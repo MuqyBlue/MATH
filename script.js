@@ -86,17 +86,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   exportBtn.addEventListener("click", () => {
 
-    html2canvas(document.querySelector(".container"), {
-  scale: 3
+  const container = document.querySelector(".container")
+  const answerSection = document.getElementById("answerSection")
+
+  // เปิด answer ก่อน export
+  answerSection.style.display = "block"
+
+  html2canvas(container, {
+    scale: 3
+  }).then(canvas => {
+
+    const link = document.createElement("a")
+    link.download = "math-worksheet.png"
+    link.href = canvas.toDataURL("image/png")
+    link.click()
+
+  })
+
 })
-
-      const link = document.createElement("a");
-      link.download = `worksheet-${Date.now()}.png`
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-
-    });
 
   });
 
-});
